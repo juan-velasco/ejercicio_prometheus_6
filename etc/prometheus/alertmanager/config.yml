@@ -1,0 +1,7 @@
+route:
+  receiver: 'myapp'
+
+receivers:
+  - name: 'myapp'
+    webhook_configs:
+      - url: http://my.alerts.dashboard.api

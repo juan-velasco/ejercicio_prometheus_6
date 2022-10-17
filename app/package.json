@@ -1,0 +1,7 @@
+{
+    "name": "prometheus-example",
+    "dependencies": {
+      "express": "^4.18.2",
+      "prom-client": "^11.5.0"
+    }
+  }

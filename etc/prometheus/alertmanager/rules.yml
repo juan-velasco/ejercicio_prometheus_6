@@ -1,0 +1,14 @@
+# de esta forma estamos agrupando varias alertas
+groups:
+- name: myapp
+  rules:
+
+  # Cuando el porcentaje de responses sea superior al 50% durante un minuto emitiremos la alerta
+  - alert: http_errors_gt_50%
+    expr: sum(rate(test_counter{statusCode!="200"}[1m])) / sum(rate(test_counter[1m])) * 100 > 50
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: "HTTP Status codes != 200 is > 50% of total HTTP Responses"
+      description: "Non 200 responses is  > 50%"

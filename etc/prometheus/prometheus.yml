@@ -1,0 +1,34 @@
+global:
+  scrape_interval:     15s
+  evaluation_interval: 15s
+  external_labels:
+    monitor: 'node-app'
+
+scrape_configs:
+
+  - job_name: 'prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'app'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['app:8081']
+
+  - job_name: 'alertmanager'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['alertmanager:9093']
+
+# Configuración de las reglas de alertmanager
+rule_files:
+  - "/etc/prometheus/alertmanager/rules.yml"
+
+# Damos de alta el alertmanager en prometheus
+alerting:
+  alertmanagers:
+    - scheme: http
+      static_configs:
+        - targets:
+            - "alertmanager:9093"
