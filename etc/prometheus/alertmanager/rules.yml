@@ -3,7 +3,7 @@ groups:
 - name: myapp
   rules:
 
-  # Cuando el porcentaje de responses sea superior al 50% durante un minuto emitiremos la alerta
+  # Cuando el porcentaje de responses distintos a 200 sea superior al 50% durante un minuto emitiremos la alerta
   - alert: http_errors_gt_50%
     expr: sum(rate(test_counter{statusCode!="200"}[1m])) / sum(rate(test_counter[1m])) * 100 > 50
     for: 1m
